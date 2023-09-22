@@ -62,5 +62,7 @@ def register(request):
     else:
         return render(request, "auctions/register.html")
     
-def check():
-    return 1
+def check(request):
+    complete = 1
+        if complete = 1:
+    return render(request, "auctions/index.html")
