@@ -7,8 +7,8 @@ from django.db import models
 # Bid and Comment classes
 class User(AbstractUser):
     pass
-    bio = models.CharField(max_length= 64*4),
-    profile_photo = models.ImageField()
+    #bio = models.CharField(max_length= 64*4),
+    #profile_photo = models.ImageField()
 
 class AuctionListing(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name= "auction_listings"),
