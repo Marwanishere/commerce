@@ -6,6 +6,7 @@ from django.db import models
 #The cs50 chatbot was used to help generate the User, AuctionListing,
 # Bid and Comment classes
 class User(AbstractUser):
+    pass
     bio = models.CharField(max_length= 64*4),
     profile_photo = models.ImageField()
 
