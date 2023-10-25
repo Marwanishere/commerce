@@ -2,5 +2,20 @@
 
 {% block body %}
     <h2>Make a new listing</h2>
-
+    <div>
+        <!-- form pseudocode obtained from cs50 chatbot -->
+        <form action = "{% url 'new_listing' %}" method = "post">
+            {% csrf_token %}
+            {{ form.user.errors }}
+            {{ form.user.label_tag }}
+            {{ form.user }}
+            {{ form.title.errors }}
+            {{ form.title.label_tag }}
+            {{ form.title }}
+            {{ form.description.errors }}
+            {{ form.description.label_tag }}
+            {{ form.description }}
+            <button type = "submit">Enter</button>>
+        </form>
+    </div>
 {% endblock %}
