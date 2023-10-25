@@ -11,7 +11,7 @@ class User(AbstractUser):
     #profile_photo = models.ImageField()
 
 class AuctionListing(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name= "auction_listings"),
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name= "auction_listings")
     title = models.CharField(max_length=64)
     description = models.TextField()
 

@@ -81,5 +81,5 @@ def new_listing_view(request):
             new_listing.save()
     else:
         form = AuctionListingForm()
-    return render(request, 'new_listing.html', {'form': form})
+    return render(request, 'auctions/new_listing.html', {'form': form})
     #return render(request, "auctions/new_listing.html")
