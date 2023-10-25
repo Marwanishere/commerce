@@ -5,6 +5,10 @@ from django.shortcuts import render
 from django.urls import reverse
 
 from .models import User
+from .models import AuctionListing
+from .models import Bid
+from .models import Comment
+from .forms import AuctionListingForm
 
 
 def index(request):
@@ -67,5 +71,15 @@ def check(request):
     if complete == 1:
         return render(request, "auctions/index.html")
     
+
 def new_listing_view(request):
-    return render(request, "auctions/new_listing.html")
+    if request.method == 'POST':
+        form = AuctionListingForm(request.POST)
+        if form.is_valid():
+            #the next line replaces all the fields in the auction listing model in models.py
+            new_listing = AuctionListing(user=form.cleaned_data['user'], title=form.cleaned_data['title'], description=form.cleaned_data['description'])
+            new_listing.save()
+    else:
+        form = AuctionListingForm()
+    return render(request, 'new_listing.html', {'form': form})
+    #return render(request, "auctions/new_listing.html")
