@@ -67,5 +67,5 @@ def check(request):
     if complete == 1:
         return render(request, "auctions/index.html")
     
-def new_listing_view():
-    pass
+def new_listing_view(request):
+    return render(request, "auctions/new_listing.html")
