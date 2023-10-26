@@ -4,7 +4,7 @@
     <h2>Make a new listing</h2>
     <div>
         <!-- form pseudocode obtained from cs50 chatbot -->
-        <form action = "{% url 'new_listing' %}" method = "post">
+        <form method = "post">
             {% csrf_token %}
             {{ form.user.errors }}
             {{ form.user.label_tag }}
