@@ -2,14 +2,14 @@
 
 {% block body %}
     <h2>Active Listings</h2>
-<!-- code framework for function below acquired from cs50 chatbot -->
-    <ul>
-        <li>{% for Auctionlisting in listings %}
-			<h2>{{ Auctionlisting.title }}</h2>
-			<p>{{ Auctionlisting.description }}</p>
-			<p>Posted by: {{ Auctionlisting.user }}</p>
-			<p>On sale: {{ Auctionlisting.active}}</p>
+<!-- code for function below acquired from cs50 chatbot prompting -->
+	<ul>
+		<li>{% for listing in Listings %}
+			<h2>{{ listing.title }}</h2>
+			<p>{{ listing.description }}</p>
+			<p>Posted by: {{ listing.user }}</p>
+			<p>On sale: {{ listing.active}}</p>
 		{% endfor %}</li>
-    </ul>
+	</ul>
 
 {% endblock %}
