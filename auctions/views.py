@@ -12,7 +12,8 @@ from .forms import AuctionListingForm
 
 
 def index(request):
-    return render(request, "auctions/index.html")
+    Listings = AuctionListing.objects.filter(active=True)
+    return render(request, "auctions/index.html",{'Listings': Listings})
 
 
 def login_view(request):
@@ -77,7 +78,7 @@ def new_listing_view(request):
         form = AuctionListingForm(request.POST)
         if form.is_valid():
             #the next line replaces all the fields in the auction listing model in models.py
-            new_listing = AuctionListing(user=form.cleaned_data['user'], title=form.cleaned_data['title'], description=form.cleaned_data['description'])
+            new_listing = AuctionListing(user=form.cleaned_data['user'], title=form.cleaned_data['title'], description=form.cleaned_data['description'],active=form.cleaned_data['active'])
             new_listing.save()
     else:
         form = AuctionListingForm()

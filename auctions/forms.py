@@ -5,4 +5,4 @@ from .models import AuctionListing
 class AuctionListingForm(forms.ModelForm):
     class Meta:
         model = AuctionListing
-        fields = ['user','title', 'description']
+        fields = ['user','title', 'description','active']
