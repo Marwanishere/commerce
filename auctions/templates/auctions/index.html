@@ -8,7 +8,11 @@
 			<li><h2>{{ listing.title }}</h2>
 			<p>{{ listing.description }}</p>
 			<p>Posted by: {{ listing.user }}</p>
-			<p>On sale: {{ listing.active}}</p></li>
+			<p>On sale: {{ listing.active}}</p>
+			<p>Category: {{ listing.category }}</p>
+			<!-- <p>Current price: bid, but im not sure how to implement this yet</p> -->
+			<p>{{listing.image}}</p>
+		</li>
 		{% endfor %}
 	</ul>
 {% endblock %}
