@@ -4,7 +4,8 @@
     <h2>Make a new listing</h2>
     <div>
         <!-- form pseudocode obtained from cs50 chatbot -->
-        <form method = "post">
+        <!-- enctype thing in form introduced from cs50.ai as a sol to image problem -->
+        <form method = "post" enctype="multipart/form-data">
             {% csrf_token %}
             {{ form.user.errors }}
             {{ form.user.label_tag }}

@@ -75,7 +75,8 @@ def check(request):
 
 def new_listing_view(request):
     if request.method == 'POST':
-        form = AuctionListingForm(request.POST)
+        #below line made using cs50 chatbot assistance
+        form = AuctionListingForm(request.POST, request.FILES)
         if form.is_valid():
             #the next line replaces all the fields in the auction listing model in models.py
             new_listing = AuctionListing(user=form.cleaned_data['user'], title=form.cleaned_data['title'],
