@@ -17,8 +17,9 @@ class AuctionListing(models.Model):
     #below line syntax corrected by cs50 chatbot
     active = models.BooleanField(default=True)
     category = models.CharField(max_length = 64)
-    #below line generated using cs50 ai assistance
+    #below 2 lines generated using cs50 ai assistance
     image = models.ImageField(upload_to='')
+    initial_bid = models.DecimalField(max_digits=5, decimal_places=2)
 
 class Bid(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name= "bid" )
