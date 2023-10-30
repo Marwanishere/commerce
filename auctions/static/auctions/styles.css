@@ -2,5 +2,12 @@ body {
     padding: 10px;
 }
 h2 {
-    color: red;
+    color   : black;
+}
+pretty_boxes {
+    color : lightskyblue;
+    border: 8px darkblue;
+    border-radius: 5%;
+    padding: 2%;
+
 }
