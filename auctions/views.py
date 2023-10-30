@@ -90,7 +90,7 @@ def new_listing_view(request):
     #return render(request, "auctions/new_listing.html")
 
 def current_price():
-    if Bid < initial_bid:
+    if Bid < 0:
         initial_bid = Bid
     else:
         return Bid
