@@ -88,3 +88,9 @@ def new_listing_view(request):
         form = AuctionListingForm()
     return render(request, 'auctions/new_listing.html', {'form': form})
     #return render(request, "auctions/new_listing.html")
+
+def current_price():
+    if Bid < initial_bid:
+        initial_bid = Bid
+    else:
+        return Bid
