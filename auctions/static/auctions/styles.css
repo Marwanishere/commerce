@@ -5,7 +5,7 @@ h2 {
     color   : black;
 }
 pretty_boxes {
-    color : lightskyblue;
+    color : rgb(8, 21, 29);
     border: 8px darkblue;
     border-radius: 5%;
     padding: 2%;
