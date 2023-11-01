@@ -7,6 +7,7 @@
 			<div>
 <!-- code for function below acquired from cs50 chatbot prompting -->
 				{% for listing in Listings %}
+					<a href="{% url 'listing' listing.id %}">
 					<li><h2>{{ listing.title }}</h2>
 					<img src="{{ listing.image.url }}" style="max-width: 300px; max-height: 300px;">
 					<p>{{ listing.description }}</p>
