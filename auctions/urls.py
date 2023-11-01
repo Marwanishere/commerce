@@ -9,5 +9,6 @@ urlpatterns = [
     path("login", views.login_view, name="login"),
     path("new_listing", views.new_listing_view, name="new_listing"),
     path("logout", views.logout_view, name="logout"),
-    path("register", views.register, name="register")
+    path("register", views.register, name="register"),
+    path("listing", views.current_price,name = "listing")
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

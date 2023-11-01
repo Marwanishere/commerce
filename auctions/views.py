@@ -89,8 +89,10 @@ def new_listing_view(request):
     return render(request, 'auctions/new_listing.html', {'form': form})
     #return render(request, "auctions/new_listing.html")
 
-def current_price():
-    if Bid < 1.00:
-        initial_bid = Bid
+#following function was made with the help of cs50 chatbot
+def current_price(auction_listing):
+    highest_bid = Bid.objects.filter(auction_listing=auction_listing).order_by('-bid_amount').first()
+    if highest_bid is None:
+        return auction_listing.initial_bid
     else:
-        return Bid
+        return highest_bid.bid_amount
