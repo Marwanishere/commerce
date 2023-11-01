@@ -90,9 +90,11 @@ def new_listing_view(request):
     #return render(request, "auctions/new_listing.html")
 
 #following function was made with the help of cs50 chatbot
-def current_price(auction_listing):
+def current_price(request, listing_id):
+    auction_listing = (AuctionListing, id=listing_id)
     highest_bid = Bid.objects.filter(auction_listing=auction_listing).order_by('-bid_amount').first()
     if highest_bid is None:
         return auction_listing.initial_bid
     else:
         return highest_bid.bid_amount
+    return render(request, 'listing.html', {'auction_listing': auction_listing})
