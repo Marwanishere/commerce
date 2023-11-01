@@ -91,8 +91,8 @@ def new_listing_view(request):
 
 #following function was made with the help of cs50 chatbot
 def current_price(request, listing_id):
-    auction_listing = (AuctionListing, id=listing_id)
-    highest_bid = Bid.objects.filter(auction_listing=auction_listing).order_by('-bid_amount').first()
+    Bid.auction_listing = (AuctionListing, id == listing_id)
+    highest_bid = Bid.objects.filter(auction_listing= Bid.auction_listing).order_by('-bid_amount').first()
     if highest_bid is None:
         return auction_listing.initial_bid
     else:
