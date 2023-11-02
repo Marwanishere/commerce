@@ -10,6 +10,12 @@
         <p>On sale: {{ listing.active}}</p>
         <p>Category: {{ listing.category }}</p>
         <p>Initial Bid: {{ listing.initial_bid }}</p>
-        <p>Current Bid: {{ listing.initial_bid }}</p>
+        <form method = "post">
+            {% csrf_token %}
+            {{ form.bid_amount.errors }}
+            {{ form.bid_amount.label_tag }}
+            {{ form.bid_amount }}
+            <button type = "submit">Enter</button>
+        </form>
 	</ul>
 {% endblock %}

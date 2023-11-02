@@ -3,6 +3,7 @@ from django.db import IntegrityError
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
 from django.urls import reverse
+from django.shortcuts import redirect
 
 from .models import User
 from .models import AuctionListing
@@ -90,13 +91,20 @@ def new_listing_view(request):
     #return render(request, "auctions/new_listing.html")
 
 #following function was made with the help of cs50 chatbot
-def current_price(listing_id):
+def current_price(request, listing_id):
     auction_listing = AuctionListing.objects.get(id=listing_id)
-    highest_bid = Bid.objects.filter(auction_listing=auction_listing).order_by('-bid_amount').first()
-    if highest_bid is None:
-        return auction_listing.initial_bid
+    if request.method == 'POST':
+        form = BidForm(request.POST)
+        if form.is_valid():
+            new_bid = Bid(user=request.user, auction_listing=auction_listing, bid_amount=form.cleaned_data['bid_amount'])
+            new_bid.save()
+            if form.is_valid():
+                new_bid = Bid(user=request.user, auction_listing=auction_listing, bid_amount=form.cleaned_data['bid_amount'])
+                new_bid.save()
+                return redirect('auctions:listing_detail', listing_id=auction_listing.id)
     else:
-        return highest_bid.bid_amount
+        form = BidForm()
+    return render(request, 'auctions/listing.html', {'form': form})
     
 def listing_view(request, listing_id):
     #following line was made with cs50 chatbot assistance
