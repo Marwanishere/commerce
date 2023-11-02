@@ -9,4 +9,6 @@ class AuctionListingForm(forms.ModelForm):
         fields = ['user','title', 'description','active','category','image','initial_bid']
 
 class BidForm(forms.ModelForm):
-    bid_amount = forms.DecimalField(max_digits=6, decimal_places=2)
+    class Meta:
+        model = Bid
+        fields = ['user', 'auction_listing','bid_amount']

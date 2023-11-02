@@ -10,7 +10,7 @@
         <p>On sale: {{ listing.active}}</p>
         <p>Category: {{ listing.category }}</p>
         <p>Initial Bid: {{ listing.initial_bid }}</p>
-        <form method = "post">
+        <form method = "post" enctype="multipart/form-data">
             {% csrf_token %}
             {{ form.bid_amount.errors }}
             {{ form.bid_amount.label_tag }}

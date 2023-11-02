@@ -10,6 +10,7 @@ from .models import AuctionListing
 from .models import Bid
 from .models import Comment
 from .forms import AuctionListingForm
+from .forms import BidForm
 
 
 def index(request):
@@ -101,7 +102,7 @@ def current_price(request, listing_id):
             if form.is_valid():
                 new_bid = Bid(user=request.user, auction_listing=auction_listing, bid_amount=form.cleaned_data['bid_amount'])
                 new_bid.save()
-                return redirect('auctions:listing_detail', listing_id=auction_listing.id)
+                return redirect('auctions:listing', listing_id=auction_listing.id)
     else:
         form = BidForm()
     return render(request, 'auctions/listing.html', {'form': form})
