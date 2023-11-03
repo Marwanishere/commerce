@@ -99,13 +99,10 @@ def current_price(request, listing_id):
         if form.is_valid():
             new_bid = Bid(user=request.user, auction_listing=auction_listing, bid_amount=form.cleaned_data['bid_amount'])
             new_bid.save()
-            if form.is_valid():
-                new_bid = Bid(user=request.user, auction_listing=auction_listing, bid_amount=form.cleaned_data['bid_amount'])
-                new_bid.save()
-                return redirect('auctions:listing', listing_id=auction_listing.id)
+            return render(request, 'auctions/listing.html', {'form': form, 'listing': auction_listing})
     else:
         form = BidForm()
-    return render(request, 'auctions/listing.html', {'form': form})
+    return render(request, 'auctions/listing.html', {'form': form, 'listing': auction_listing})
     
 def listing_view(request, listing_id):
     #following line was made with cs50 chatbot assistance
