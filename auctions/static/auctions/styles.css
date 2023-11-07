@@ -11,3 +11,8 @@ pretty_boxes {
     padding: 2.5%;
 
 }
+p {
+    font-weight: bold;
+    font-style: inherit;
+    font-size: larger;
+}
