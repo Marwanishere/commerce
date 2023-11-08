@@ -1,5 +1,5 @@
 {% extends "auctions/layout.html" %}
-
+{% load templatetags %}
 {% block body %}
     <h1>Active Listings</h1>
 	<ul>
@@ -15,9 +15,7 @@
 					<p>On sale: {{ listing.active}}</p>
 					<p>Category: {{ listing.category }}</p>
 					<p>Initial Bid: {{ listing.initial_bid }}</p>
-					<p>Current Bid: {{ current_bids.listing.id }}</p>
-					<!-- <p>Current price: bid, but im not sure how to implement this yet</p> -->
-					
+					<p>{{ current_bids|get_item:listing.id }}</p>
 				</li>
 				{% endfor %}
 			</div>
