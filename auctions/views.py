@@ -113,7 +113,6 @@ def current_price(request, listing_id):
         if form.is_valid():
             new_bid = Bid(user=request.user, auction_listing=auction_listing, bid_amount=form.cleaned_data['bid_amount'])
             new_bid.save()
-            
             return render(request, 'auctions/listing.html', {'form': form, 'listing': auction_listing, 'current_bids': current_bids})
     else:
         form = BidForm()
