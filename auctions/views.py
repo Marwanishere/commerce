@@ -15,7 +15,13 @@ from .forms import BidForm
 
 def index(request):
     Listings = AuctionListing.objects.filter(active=True)
-    return render(request, "auctions/index.html",{'Listings': Listings})
+    current_bids = {}
+    for listing in Listings:
+        bid = Bid.objects.filter(auction_listing=listing).order_by('-bid_amount').first()
+        if bid == None:
+            bid = listing.initial_bid
+        current_bids[listing.id] = bid
+    return render(request, "auctions/index.html",{'Listings': Listings, 'current_bids': current_bids})
 
 
 def login_view(request):
