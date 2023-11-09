@@ -100,23 +100,24 @@ def new_listing_view(request):
 #following function was made with the help of cs50 chatbot
 def current_price(request, listing_id):
     auction_listing = AuctionListing.objects.get(id=listing_id)
+    auction_listings = AuctionListing.objects.all()
+    current_bids = {}
+    for listing in auction_listings:
+        bid = Bid.objects.filter(auction_listing=listing).order_by('-bid_amount').first()
+        if bid == None:
+            bid = listing.initial_bid
+        current_bids[listing.id] = bid if bid else listing.initial_bid
+        current_bids
     if request.method == 'POST':
         form = BidForm(request.POST)
         if form.is_valid():
             new_bid = Bid(user=request.user, auction_listing=auction_listing, bid_amount=form.cleaned_data['bid_amount'])
             new_bid.save()
-            auction_listings = AuctionListing.objects.all()
-            current_bids = {}
-            for listing in auction_listings:
-                bid = Bid.objects.filter(auction_listing=listing).order_by('-bid_amount').first()
-                if bid == None:
-                    bid = listing.initial_bid
-                current_bids[listing.id] = bid
-                current_bids
+            
             return render(request, 'auctions/listing.html', {'form': form, 'listing': auction_listing, 'current_bids': current_bids})
     else:
         form = BidForm()
-    return render(request, 'auctions/listing.html', {'form': form, 'listing': auction_listing})
+    return render(request, 'auctions/listing.html', {'form': form, 'listing': auction_listing, 'current_bids': current_bids})
     
 def listing_view(request, listing_id):
     #following line was made with cs50 chatbot assistance

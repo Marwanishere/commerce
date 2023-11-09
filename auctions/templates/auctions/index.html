@@ -15,7 +15,11 @@
 					<p>On sale: {{ listing.active}}</p>
 					<p>Category: {{ listing.category }}</p>
 					<p>Initial Bid: {{ listing.initial_bid }}</p>
-					<p>{{ current_bids|get_item:listing.id }}</p>
+					{% if current_bids|get_item:listing.id %}
+						<p>Current Bid: {{ current_bids|get_item:listing.id }}</p>
+					{% else %}
+						<p>No bids yet.</p>
+					{% endif %}
 				</li>
 				{% endfor %}
 			</div>
