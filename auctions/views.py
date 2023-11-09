@@ -106,6 +106,7 @@ def current_price(request, listing_id):
                 if bid == None:
                     bid = listing.initial_bid
                 current_bids[listing.id] = bid
+                current_bids
             return render(request, 'auctions/listing.html', {'form': form, 'listing': auction_listing, 'current_bids': current_bids})
     else:
         form = BidForm()
