@@ -4,6 +4,9 @@ body {
 h2 {
     color   : black;
 }
+h1 {
+    color   : red;
+}
 pretty_boxes {
     color : rgb(8, 21, 29);
     border: 8px darkblue;
