@@ -119,6 +119,10 @@ def current_price(request, listing_id):
     return render(request, 'auctions/listing.html', {'form': form, 'listing': auction_listing, 'current_bids': current_bids})
     
 def listing_view(request, listing_id):
-    #following line was made with cs50 chatbot assistance
     listing = AuctionListing.objects.get(id=listing_id)
-    return render(request, 'auctions/listing.html', {'listing': listing})
+    bid = listing.auction_listing.first()
+    if bid != None:
+        amount = bid.bid_amount
+    else:
+        return 1
+    return render(request, 'auctions/listing.html', {'listing': listing, 'amount':amount})
