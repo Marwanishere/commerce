@@ -15,7 +15,5 @@ pretty_boxes {
 
 }
 p {
-    font-weight: bold;
     font-style: inherit;
-    font-size: larger   ;
 }
