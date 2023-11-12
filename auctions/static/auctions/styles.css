@@ -1,5 +1,5 @@
 body {
-    padding: 8px;
+    padding: 10px;
 }
 h2 {
     color   : black;
@@ -9,12 +9,13 @@ h1 {
 }
 pretty_boxes {
     color : rgb(8, 21, 29);
-    border: 8px darkblue;
+    border: 8px rgb(7, 7, 44);
     border-radius: 5%;
     padding: 2.5%;
 
 }
 p {
-    font-weight: normal;
+    font-weight: bold;
     font-style: inherit;
+    font-size: larger   ;
 }
