@@ -4,6 +4,7 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
 from django.urls import reverse
 from django.shortcuts import redirect
+from django.db.models import Max
 
 from .models import User
 from .models import AuctionListing
@@ -125,4 +126,5 @@ def listing_view(request, listing_id):
         amount = bid.bid_amount
     else:
         return 1
-    return render(request, 'auctions/listing.html', {'listing': listing, 'amount':amount})
+    highest = listing.auction_listing.aggregate(Max('bid_amount'))['bid_amount__max']
+    return render(request, 'auctions/listing.html', {'listing': listing, 'amount':amount, 'highest': highest})

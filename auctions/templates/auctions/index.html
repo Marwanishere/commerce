@@ -15,16 +15,11 @@
 					<p>On sale: {{ listing.active}}</p>
 					<p>Category: {{ listing.category }}</p>
 					<p>Initial Bid: {{ listing.initial_bid }}</p>
-					<p>Bid Amount: {{ listing.bid_amount }}</p>
-					{% if current_bids|get_item:listing.id %}
-						<p>Current Bid: {{ current_bids|get_item:listing.id }}</p>
-					{% else %}
-						<p>No bids yet.</p>
-					{% endif %}
 					<!-- for loop below made using assistance from cs50 chatbot -->
 					{% for bid in listing.auction_listing.all %}
     					{{ bid.bid_amount }}
 					{% endfor %}
+					{{ highest }}
 				</li>
 				{% endfor %}
 			</div>
