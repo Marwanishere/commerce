@@ -126,5 +126,5 @@ def listing_view(request, listing_id):
         amount = bid.bid_amount
     else:
         amount = 0
-    highest = listing.auction_listing.aggregate(Max('bid_amount'))['bid_amount__max']
+    highest = max((bid.bid_amount for bid in listing.auction_listing.all()), default=0)
     return render(request, 'auctions/listing.html', {'listing': listing, 'amount':amount, 'highest': highest})
