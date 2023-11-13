@@ -117,7 +117,7 @@ def current_price(request, listing_id):
             return render(request, 'auctions/listing.html', {'form': form, 'listing': auction_listing, 'current_bids': current_bids})
     else:
         form = BidForm()
-    return render(request, 'auctions/listing.html', {'form': form, 'listing': auction_listing, 'current_bids': current_bids})
+    return render(request, 'auctions/listing.html', {'form': form, 'listing': auction_listing})
     
 def listing_view(request, listing_id):
     listing = AuctionListing.objects.get(id=listing_id)
@@ -125,6 +125,6 @@ def listing_view(request, listing_id):
     if bid != None:
         amount = bid.bid_amount
     else:
-        return 1
+        amount = 0
     highest = listing.auction_listing.aggregate(Max('bid_amount'))['bid_amount__max']
     return render(request, 'auctions/listing.html', {'listing': listing, 'amount':amount, 'highest': highest})
