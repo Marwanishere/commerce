@@ -19,7 +19,10 @@
 					{% for bid in listing.auction_listing.all %}
     					{{ bid.bid_amount }}
 					{% endfor %}
-					{{ highest }}
+					<p>hekki</p>
+					{% for highest in listing.auction_listing.all %}
+    					{{ highest.bid_amount }}
+					{% endfor %}
 				</li>
 				{% endfor %}
 			</div>
