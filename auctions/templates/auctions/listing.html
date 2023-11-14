@@ -10,12 +10,14 @@
         <p>On sale: {{ listing.active}}</p>
         <p>Category: {{ listing.category }}</p>
         <p>Initial Bid: {{ listing.initial_bid }}</p>
+        <p>Current Bid: {{ listing.current_bid }}</p>
         <form method="post" action="{% url 'current_price' listing.id %}" enctype="multipart/form-data">
             {% csrf_token %}
             {{ form.bid_amount.errors }}
             {{ form.bid_amount.label_tag }}
             {{ form.bid_amount }}
-            <button type = "submit">Enter</button>
+            <button type = "submit">Enter Bid</button>
         </form></li>
+
 	</ul>
 {% endblock %}

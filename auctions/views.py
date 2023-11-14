@@ -13,7 +13,6 @@ from .models import Comment
 from .forms import AuctionListingForm
 from .forms import BidForm
 
-
 def index(request):
     Listings = AuctionListing.objects.filter(active=True)
     current_bids = {}
@@ -23,7 +22,6 @@ def index(request):
             bid = listing.initial_bid
         current_bids[listing.id] = bid
     return render(request, "auctions/index.html",{'Listings': Listings, 'current_bids': current_bids})
-
 
 def login_view(request):
     if request.method == "POST":
@@ -44,11 +42,9 @@ def login_view(request):
     else:
         return render(request, "auctions/login.html")
 
-
 def logout_view(request):
     logout(request)
     return HttpResponseRedirect(reverse("index"))
-
 
 def register(request):
     if request.method == "POST":
@@ -75,12 +71,6 @@ def register(request):
         return HttpResponseRedirect(reverse("index"))
     else:
         return render(request, "auctions/register.html")
-    
-def check(request):
-    complete = 1
-    if complete == 1:
-        return render(request, "auctions/index.html")
-    
 
 def new_listing_view(request):
     if request.method == 'POST':
@@ -114,7 +104,7 @@ def current_price(request, listing_id):
         if form.is_valid():
             new_bid = Bid(user=request.user, auction_listing=auction_listing, bid_amount=form.cleaned_data['bid_amount'])
             new_bid.save()
-            return render(request, 'auctions/listing.html', {'form': form, 'listing': auction_listing, 'current_bids': current_bids})
+            return render(request, 'auctions/new_listing.html', {'form': form, 'listing': auction_listing, 'current_bids': current_bids})
     else:
         form = BidForm()
     return render(request, 'auctions/listing.html', {'form': form, 'listing': auction_listing})
