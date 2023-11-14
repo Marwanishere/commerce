@@ -15,16 +15,6 @@
 					<p>On sale: {{ listing.active}}</p>
 					<p>Category: {{ listing.category }}</p>
 					<p>Initial Bid: {{ listing.initial_bid }}</p>
-					<!-- for loop below made using assistance from cs50 chatbot -->
-					{% for bid in listing.auction_listing.all %}
-    					{{ bid.bid_amount }}
-					{% endfor %}
-					<p>hekki</p>
-					{% for quack in listing.auction_listing.all %}
-    					{{ quack.bid_amount }}
-					{% endfor %}
-					<p>{{ highest }}</p>
-					<p>{{ listing.current_bids }}</p>
 					<p>Current Bid: {{ listing.current_bid }}</p>
 				</li>
 				{% endfor %}
