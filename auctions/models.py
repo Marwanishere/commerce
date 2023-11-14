@@ -1,6 +1,7 @@
 from sys import maxsize
 from django.contrib.auth.models import AbstractUser
 from django.db import models
+from django.shortcuts import render
 
 
 #The cs50 chatbot was used to help generate the User, AuctionListing,
@@ -22,6 +23,13 @@ class AuctionListing(models.Model):
     image = models.ImageField(upload_to='')
     initial_bid = models.DecimalField(max_digits=6, decimal_places=2)
 
+    def current_bid(self):
+        bid = Bid.objects.filter(auction_listing=self).order_by('-bid_amount').first()
+        if bid:
+            return bid.bid_amount
+        else:
+            return self.initial_bid
+        
 class Bid(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name= "bid" )
     auction_listing = models.ForeignKey(AuctionListing, on_delete=models.CASCADE, related_name= "auction_listing" )
