@@ -102,9 +102,14 @@ def current_price(request, listing_id):
     if request.method == 'POST':
         form = BidForm(request.POST)
         if form.is_valid():
-            new_bid = Bid(user=request.user, auction_listing=auction_listing, bid_amount=form.cleaned_data['bid_amount'])
-            new_bid.save()
-            return render(request, 'auctions/new_listing.html', {'form': form, 'listing': auction_listing, 'current_bids': current_bids})
+            bid_amount = form.cleaned_data['bid_amount']
+            highest_bidding_price = current_bids[auction_listing.id].bid_amount
+            if bid_amount <= highest_bidding_price:
+                form.add_error('bid_amount',"Your bid is not sufficient and must be higher than the current bid amount")
+            else:
+                new_bid = Bid(user=request.user, auction_listing=auction_listing, bid_amount=form.cleaned_data['bid_amount'])
+                new_bid.save()
+                return render(request, 'auctions/listing.html', {'form': form, 'listing': auction_listing, 'current_bids': current_bids})
     else:
         form = BidForm()
     return render(request, 'auctions/listing.html', {'form': form, 'listing': auction_listing})
