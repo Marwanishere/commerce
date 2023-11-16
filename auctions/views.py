@@ -103,7 +103,10 @@ def current_price(request, listing_id):
         form = BidForm(request.POST)
         if form.is_valid():
             bid_amount = form.cleaned_data['bid_amount']
-            highest_bidding_price = current_bids[auction_listing.id].bid_amount
+            if current_bids[auction_listing.id] == listing.initial_bid:
+                highest_bidding_price = current_bids[auction_listing.id]
+            else:
+                highest_bidding_price = current_bids[auction_listing.id].bid_amount
             if bid_amount <= highest_bidding_price:
                 form.add_error('bid_amount',"Your bid is not sufficient and must be higher than the current bid amount")
             else:
