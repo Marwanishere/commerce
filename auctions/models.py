@@ -38,6 +38,6 @@ class Bid(models.Model):
 class Comment(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name= "comment")
     auction_listing = models.ForeignKey(AuctionListing, on_delete=models.CASCADE)
-
+    comment = models.TextField()
 #when adding new models remember to run python manage.py makemigrations and python manage.py migrate
 #so that django gnerates the correct sql commands to make the table your model represents

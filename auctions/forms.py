@@ -2,6 +2,7 @@
 from django import forms
 from .models import AuctionListing
 from .models import Bid
+from .models import Comment
 
 class AuctionListingForm(forms.ModelForm):
     class Meta:
@@ -12,3 +13,8 @@ class BidForm(forms.ModelForm):
     class Meta:
         model = Bid
         fields = ['bid_amount']
+
+class CommentForm(forms.ModelForm):
+    class Meta:
+        model = Comment
+        fields = ['comment']

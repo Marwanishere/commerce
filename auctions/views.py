@@ -12,6 +12,7 @@ from .models import Bid
 from .models import Comment
 from .forms import AuctionListingForm
 from .forms import BidForm
+from .forms import CommentForm
 
 def index(request):
     Listings = AuctionListing.objects.filter(active=True)
@@ -124,5 +125,26 @@ def listing_view(request, listing_id):
         amount = bid.bid_amount
     else:
         amount = 0
+    if request.method == 'POST':
+        if request.user.is_authenticated:
+            form = CommentForm(request.POST)
+            if form.is_valid():
+                comment = form.cleaned_data['comment']
+                new_comment = Comment(user=request.user, listing= listing, comment=form.cleaned_data['comment'])
+                new_comment.save()
+                return render(request, 'auctions/listing.html', {'listing': listing, 'comment':comment})
+            else:
+                form.add_error('comment',"An error has occured, your comment cannot be submitted")
+                return render(request, 'auctions/listing.html', {'form': form})
+        else:
+            form = CommentForm()
+            form.add_error('comment',"You must be signed in to submit a comment")
+            return render(request, 'auctions/listing.html', {'form': form})
+    else:
+        if request.user.is_authenticated:
+            form = CommentForm()
+            return render(request, 'auctions/listing.html', {'form': form})
+        else:
+            form.add_error('comment',"You must be signed in to submit a comment")
     highest = max((bid.bid_amount for bid in listing.auction_listing.all()), default=0)
     return render(request, 'auctions/listing.html', {'listing': listing, 'amount':amount, 'highest': highest})

@@ -18,6 +18,12 @@
             {{ form.bid_amount }}
             <button type = "submit">Enter Bid</button>
         </form></li>
-
+        <p>
+            <form method="post" >
+                {% csrf_token %}
+                {{ form }}
+                <button type = "submit">Save Comment</button>
+            </form>
+        </p>
 	</ul>
 {% endblock %}
