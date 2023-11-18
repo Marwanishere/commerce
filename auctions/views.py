@@ -130,7 +130,7 @@ def listing_view(request, listing_id):
             form = CommentForm(request.POST)
             if form.is_valid():
                 comment = form.cleaned_data['comment']
-                new_comment = Comment(user=request.user, listing= listing, comment=form.cleaned_data['comment'])
+                new_comment = Comment(user=request.user, comment=form.cleaned_data['comment'])
                 new_comment.save()
                 return render(request, 'auctions/listing.html', {'listing': listing, 'comment':comment})
             else:
@@ -143,7 +143,7 @@ def listing_view(request, listing_id):
     else:
         if request.user.is_authenticated:
             form = CommentForm()
-            return render(request, 'auctions/listing.html', {'form': form})
+            return render(request, 'auctions/listing.html', {'form': form,'listing': listing})
         else:
             form.add_error('comment',"You must be signed in to submit a comment")
     highest = max((bid.bid_amount for bid in listing.auction_listing.all()), default=0)
