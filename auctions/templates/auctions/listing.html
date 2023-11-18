@@ -1,6 +1,15 @@
 {% extends "auctions/layout.html" %}
 
+
 {% block body %}
+<!-- from cs50 chatbot on removing buttons after pressed, doesn't currently work -->
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+        document.getElementById("Form1").addEventListener("submit", function(){
+            document.getElementById("Button1").style.display = 'none';
+            });
+        });
+    </script>
     <h2>Listing</h2>
 	<ul>
         <li><h2>{{ listing.title }}</h2>
@@ -9,8 +18,8 @@
         <p>Posted by: {{ listing.user }}</p>
         <p>On sale: {{ listing.active}}</p>
         <p>Category: {{ listing.category }}</p>
-        <p>Initial Bid: {{ listing.initial_bid }}</p>
-        <p>Current Bid: {{ listing.current_bid }}</p>
+        <p>Initial Bid: £{{ listing.initial_bid }}</p>
+        <p>Current Bid: £{{ listing.current_bid }}</p>
         <form method="post" action="{% url 'current_price' listing.id %}" enctype="multipart/form-data">
             {% csrf_token %}
             {{ form.bid_amount.errors }}
@@ -18,10 +27,10 @@
             {{ form.bid_amount }}
             <button type = "submit">Enter Bid</button>
         </form>
-            <form method="post" >
+            <form method="post" id = "Form1" >
                 {% csrf_token %}
                 {{ form }}
-                <button type = "submit">Save Comment</button>
+                <button id = "Button1" type = "submit" >Save Comment</button>
             </form></li>
         <p>
             {% for comment in listing.comments.all %}

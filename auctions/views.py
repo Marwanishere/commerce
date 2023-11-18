@@ -141,8 +141,8 @@ def listing_view(request, listing_id):
             form.add_error('comment',"You must be signed in to submit a comment")
             return render(request, 'auctions/listing.html', {'form': form})
     else:
-        if request.user.is_authenticated:
-            form = CommentForm()
+        form = CommentForm()
+        if request.user.is_authenticated: 
             return render(request, 'auctions/listing.html', {'form': form,'listing': listing})
         else:
             form.add_error('comment',"You must be signed in to submit a comment")
