@@ -129,10 +129,10 @@ def listing_view(request, listing_id):
         if request.user.is_authenticated:
             form = CommentForm(request.POST)
             if form.is_valid():
-                comment = form.cleaned_data['comment']
-                new_comment = Comment(user=request.user, comment=form.cleaned_data['comment'])
+                listing = AuctionListing.objects.get(id=listing_id)
+                new_comment = Comment(user=request.user, comment=form.cleaned_data['comment'], auction_listing=listing)
                 new_comment.save()
-                return render(request, 'auctions/listing.html', {'listing': listing, 'comment':comment})
+                return render(request, 'auctions/listing.html', {'listing': listing})
             else:
                 form.add_error('comment',"An error has occured, your comment cannot be submitted")
                 return render(request, 'auctions/listing.html', {'form': form})
