@@ -17,13 +17,16 @@
             {{ form.bid_amount.label_tag }}
             {{ form.bid_amount }}
             <button type = "submit">Enter Bid</button>
-        </form></li>
-        <p>
+        </form>
             <form method="post" >
                 {% csrf_token %}
                 {{ form }}
                 <button type = "submit">Save Comment</button>
-            </form>
+            </form></li>
+        <p>
+            {% for comment in listing.comments.all %}
+                <li>Comment: {{ comment.comment }}</li>
+            {% endfor %}
         </p>
 	</ul>
 {% endblock %}
