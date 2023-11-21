@@ -149,7 +149,21 @@ def listing_view(request, listing_id):
     highest = max((bid.bid_amount for bid in listing.auction_listing.all()), default=0)
     return render(request, 'auctions/listing.html', {'listing': listing, 'amount':amount, 'highest': highest})
 
-def closing_bid_view(request, listing_id):
+def closing_bid_view(request, listing_id, current_bids):
     listing = AuctionListing.objects.get(id = listing_id)
     if listing == None:
-        return 
+        return form.add_error('listing',"No such listing found")
+    if request.user.is_authenticated and user made listing:
+        if listing is still open:
+            if request.method == 'POST':
+                listing = listing,
+                highest_bid = current_bids
+                if highest_bid has assosiated an assosiated user:
+                    set highest_bid as winner
+                    return (highest_bid.user)
+                listing.save()
+                return render(request, 'auctions/listing.html', {'highest_bid': highest_bid, 'highest_bid.user': highest_bid.user})
+        else:
+            return form.add_error('listing',"bid already closed")
+    else:
+        return form.add_error('listing',"Not valid user to close bid")
