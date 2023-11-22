@@ -162,7 +162,7 @@ def closing_bid_view(request, listing_id, current_bids):
                     set highest_bid as winner
                     return (highest_bid.user)
                 listing.save()
-                return render(request, 'auctions/listing.html', {'highest_bid': highest_bid, 'highest_bid.user': highest_bid.user})
+                return render(request, 'auctions/listing.html', {'highest_bid': highest_bid, 'user': user})
         else:
             return form.add_error('listing',"bid already closed")
     else:
