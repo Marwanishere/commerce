@@ -12,7 +12,7 @@
 					<img src="{{ listing.image.url }}" style="max-width: 300px; max-height: 300px;">
 					<p>{{ listing.description }}</p>
 					<p>Posted by: {{ listing.user }}</p>
-					<p>On sale: {{ listing.active}}</p>
+					<p>On sale: {{ listing.is_open }}</p>
 					<p>Category: {{ listing.category }}</p>
 					<p>Initial Bid: £{{ listing.initial_bid }}</p>
 					<p>Current Bid: £{{ listing.current_bid }}</p>
