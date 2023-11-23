@@ -167,7 +167,7 @@ def closing_bid_view(request, listing_id):
         else:
             return form.add_error('listing',"bid already closed")
     else:
-        return form.add_error('listing',"Not valid user to close bid")
+        return render(request, "auctions/not_in.html")
 
 def not_in(request):
     return render(request, "auctions/not_in.html")
