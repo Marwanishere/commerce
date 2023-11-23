@@ -6,4 +6,7 @@
     {% else %}
         <p>You must be signed in to do this.</p>
     {% endif %}
+    {% if request.user.is_authenticated and request.user == listing.user%}
+        <p>:</p>
+    {% endif %}
 {% endblock %}
