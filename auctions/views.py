@@ -15,7 +15,7 @@ from .forms import BidForm
 from .forms import CommentForm
 
 def index(request):
-    Listings = AuctionListing.objects.filter(active=True)
+    Listings = AuctionListing.objects.filter(is_open=True)
     current_bids = {}
     for listing in Listings:
         bid = Bid.objects.filter(auction_listing=listing).order_by('-bid_amount').first()
@@ -80,7 +80,7 @@ def new_listing_view(request):
         if form.is_valid():
             #the next line replaces all the fields in the auction listing model in models.py
             new_listing = AuctionListing(user=form.cleaned_data['user'], title=form.cleaned_data['title'],
-            description=form.cleaned_data['description'],active=form.cleaned_data['active'],
+            description=form.cleaned_data['description'],is_open=form.cleaned_data['is_open'],
             category = form.cleaned_data['category'], image = form.cleaned_data['image'],
             initial_bid = form.cleaned_data['initial_bid'])
             new_listing.save()

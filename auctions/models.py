@@ -16,8 +16,6 @@ class AuctionListing(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name= "auction_listings")
     title = models.CharField(max_length=64)
     description = models.TextField()
-    #below line syntax corrected by cs50 chatbot
-    active = models.BooleanField(default=True)
     category = models.CharField(max_length = 64)
     #below 2 lines generated using cs50 ai assistance
     image = models.ImageField(upload_to='')

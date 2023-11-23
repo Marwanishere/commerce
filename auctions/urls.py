@@ -11,5 +11,6 @@ urlpatterns = [
     path("logout", views.logout_view, name="logout"),
     path("register", views.register, name="register"),
     path("bid/<int:listing_id>", views.current_price, name="current_price"),
-    path("listing/<int:listing_id>", views.listing_view, name="listing")
+    path("listing/<int:listing_id>", views.listing_view, name="listing"),
+    path("closed", views.closing_bid_view, name="closed")
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
