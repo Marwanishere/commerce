@@ -171,4 +171,8 @@ def closing_bid_view(request, listing_id):
 
 def not_in(request):
     return render(request, "auctions/not_in.html")
+
+def previous_listings_view(request):
+    inactive_listings = AuctionListing.objects.filter(is_open=False)
+    return render(request, "auctions/previous_listings.html", {'inactive_listings': inactive_listings})
 #the request.user part on line in closing_bid_view checks if the user is the same one who made the listing.
