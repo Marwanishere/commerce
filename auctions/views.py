@@ -145,8 +145,10 @@ def listing_view(request, listing_id):
         if request.user.is_authenticated: 
             return render(request, 'auctions/listing.html', {'form': form,'listing': listing})
         else:
-            return HttpResponseRedirect(reverse("not_in"))
-            
+            form.add_error('comment',"You must be signed in to submit a comment")
+    highest = max((bid.bid_amount for bid in listing.auction_listing.all()), default=0)
+    return render(request, 'auctions/listing.html', {'listing': listing, 'amount':amount, 'highest': highest})
+
 def closing_bid_view(request, listing_id):
     try:
         listing = AuctionListing.objects.get(id = listing_id)
@@ -169,5 +171,4 @@ def closing_bid_view(request, listing_id):
 
 def not_in(request):
     return render(request, "auctions/not_in.html")
-
 #the request.user part on line in closing_bid_view checks if the user is the same one who made the listing.
