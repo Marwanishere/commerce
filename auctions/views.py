@@ -150,17 +150,19 @@ def listing_view(request, listing_id):
     return render(request, 'auctions/listing.html', {'listing': listing, 'amount':amount, 'highest': highest})
 
 def closing_bid_view(request, listing_id):
-    listing = AuctionListing.objects.get(id = listing_id)
-    if listing == None:
+    try:
+        listing = AuctionListing.objects.get(id = listing_id)
+    except AuctionListing.DoesNotExist:
         return form.add_error('listing',"No such listing found")
+    bid = Bid.objects.filter(auction_listing=listing)
     if request.user.is_authenticated and request.user == listing.user:
         if listing.is_open:
             if request.method == 'POST':
-                if listing.current_bid().user is not None:
+                if bid.exists():
                     listing.is_open = False
-                    listing.winner = listing.current_bid()
+                    listing.winner = Bid.user
                 listing.save()
-                return render(request, 'auctions/auction_closed.html', {'winner': listing.current_bid().user})
+                return render(request, 'auctions/auction_closed.html', {'listing.winner': listing.winner})
         else:
             return form.add_error('listing',"bid already closed")
     else:
