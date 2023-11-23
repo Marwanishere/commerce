@@ -145,9 +145,7 @@ def listing_view(request, listing_id):
         if request.user.is_authenticated: 
             return render(request, 'auctions/listing.html', {'form': form,'listing': listing})
         else:
-            form.add_error('comment',"You must be signed in to submit a comment")
-    highest = max((bid.bid_amount for bid in listing.auction_listing.all()), default=0)
-    return render(request, 'auctions/listing.html', {'listing': listing, 'amount':amount, 'highest': highest})
+            return render(request, "auctions/not_in.html")
 
 def closing_bid_view(request, listing_id):
     try:
