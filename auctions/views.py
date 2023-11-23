@@ -177,4 +177,12 @@ def not_in(request):
 def previous_listings_view(request):
     inactive_listings = AuctionListing.objects.filter(is_open=False)
     return render(request, "auctions/previous_listings.html", {'inactive_listings': inactive_listings})
+
+def watch(request):
+    inactive_listings = AuctionListing.objects.filter(is_open=False)
+    return render(request, "auctions/watch.html", {'inactive_listings': inactive_listings})
+
+def categories(request):
+    inactive_listings = AuctionListing.objects.filter(is_open=False)
+    return render(request, "auctions/categories.html", {'inactive_listings': inactive_listings})
 #the request.user part on line in closing_bid_view checks if the user is the same one who made the listing.
