@@ -162,10 +162,12 @@ def closing_bid_view(request, listing_id):
                     listing.is_open = False
                     top_bid = listing.top_bid()
                     listing.winner = top_bid.user
+                else:
+                    listing.is_open = False
                 listing.save()
                 return render(request, 'auctions/auction_closed.html', {'listing.winner': listing.winner})
         else:
-            return form.add_error('listing',"bid already closed")
+            return HttpResponse("Bid already closed")
     else:
         return render(request, "auctions/not_in.html")
 
