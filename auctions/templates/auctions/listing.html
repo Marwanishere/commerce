@@ -23,7 +23,7 @@
         {% if listing.winner %}
             <p>The winner is: {{ listing.winner.username }}</p>
         {% else %}
-            <p> Bid still open </p>
+            <p>  </p>
         {% endif %}
         <form method="post" action="{% url 'auction_closed' listing_id=listing.id %}">
             {% csrf_token %}
