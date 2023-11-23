@@ -2,7 +2,7 @@
 {% load templatetags %}
 {% block body %}
     {% if request.user.is_authenticated%}
-        <p>You must be signed in to the correct to do this.</p>
+        <p>You must be signed in to the correct account to do this.</p>
     {% else %}
         <p>You must be signed in to do this.</p>
     {% endif %}

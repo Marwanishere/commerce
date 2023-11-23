@@ -16,11 +16,11 @@ class AuctionListing(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name= "auction_listings")
     title = models.CharField(max_length=64)
     description = models.TextField()
+    is_open = models.BooleanField(default=True)
     category = models.CharField(max_length = 64)
     #below 2 lines generated using cs50 ai assistance
     image = models.ImageField(upload_to='')
     initial_bid = models.DecimalField(max_digits=6, decimal_places=2)
-    is_open = models.BooleanField(default=True)
     winner = models.ForeignKey(User, on_delete=models.CASCADE, related_name="user", null=True, blank=True)
     def current_bid(self):
         bid = Bid.objects.filter(auction_listing=self).order_by('-bid_amount').first()
