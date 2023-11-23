@@ -20,6 +20,15 @@
         <p>Category: {{ listing.category }}</p>
         <p>Initial Bid: £{{ listing.initial_bid }}</p>
         <p>Current Bid: £{{ listing.current_bid }}</p>
+        {% if winner %}
+            <p>The winner is: {{winner.user.username}}</p>
+        {% else %}
+            <p> Bid still open </p>
+        {% endif %}
+        <form method="post" action="{% url 'closing_bid_view' %}">
+            {% csrf_token %}
+            <button type = "submit">Close Bid</button>
+        </form>
         <form method="post" action="{% url 'current_price' listing.id %}" enctype="multipart/form-data">
             {% csrf_token %}
             {{ form.bid_amount.errors }}

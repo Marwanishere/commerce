@@ -149,7 +149,7 @@ def listing_view(request, listing_id):
     highest = max((bid.bid_amount for bid in listing.auction_listing.all()), default=0)
     return render(request, 'auctions/listing.html', {'listing': listing, 'amount':amount, 'highest': highest})
 
-def closing_bid_view(request, listing_id, current_bids):
+def closing_bid_view(request, listing_id):
     listing = AuctionListing.objects.get(id = listing_id)
     if listing == None:
         return form.add_error('listing',"No such listing found")
