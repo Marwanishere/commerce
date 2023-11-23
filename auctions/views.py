@@ -134,8 +134,7 @@ def listing_view(request, listing_id):
                 new_comment.save()
                 return render(request, 'auctions/listing.html', {'listing': listing})
             else:
-                form.add_error('comment',"An error has occured, your comment cannot be submitted")
-                return render(request, 'auctions/listing.html', {'form': form})
+                return HttpResponse("Go back to index page then click on listing to submit another comment")
         else:
             form = CommentForm()
             form.add_error('comment',"You must be signed in to submit a comment")
