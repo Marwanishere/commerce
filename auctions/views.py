@@ -153,7 +153,7 @@ def closing_bid_view(request, listing_id, current_bids):
     listing = AuctionListing.objects.get(id = listing_id)
     if listing == None:
         return form.add_error('listing',"No such listing found")
-    if request.user.is_authenticated and user made listing:
+    if request.user.is_authenticated and request.user == listing.user:
         if listing is still open:
             if request.method == 'POST':
                 listing = listing,
@@ -167,3 +167,5 @@ def closing_bid_view(request, listing_id, current_bids):
             return form.add_error('listing',"bid already closed")
     else:
         return form.add_error('listing',"Not valid user to close bid")
+
+#the request.user part on line in closing_bid_view checks if the user is the same one who made the listing.
