@@ -160,7 +160,8 @@ def closing_bid_view(request, listing_id):
             if request.method == 'POST':
                 if bid.exists():
                     listing.is_open = False
-                    listing.winner = Bid.user
+                    top_bid = listing.top_bid()
+                    listing.winner = top_bid.user
                 listing.save()
                 return render(request, 'auctions/auction_closed.html', {'listing.winner': listing.winner})
         else:

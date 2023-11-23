@@ -28,7 +28,10 @@ class AuctionListing(models.Model):
             return bid.bid_amount
         else:
             return self.initial_bid
-        
+    def top_bid(self):
+        #following line was made using the help of cs50 chatbot 
+        top_bid = Bid.objects.filter(auction_listing=self).order_by('-bid_amount').first()
+        return top_bid
 class Bid(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name= "bid" )
     auction_listing = models.ForeignKey(AuctionListing, on_delete=models.CASCADE, related_name= "auction_listing" )
