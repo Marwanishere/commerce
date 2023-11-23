@@ -96,18 +96,18 @@ def current_price(request, listing_id):
     current_bids = {}
     for listing in auction_listings:
         bid = Bid.objects.filter(auction_listing=listing).order_by('-bid_amount').first()
-        if bid == None:
-            bid = listing.initial_bid
-        current_bids[listing.id] = bid if bid else listing.initial_bid
-        current_bids
+        # the below if else statement ensures im not attempting to access the bid amount
+        #of None or a Decimal object, this in conjustion with the change i made lower in the
+        #code means that there is no longer an error occuring due to variable types
+        if bid:
+            current_bids[listing.id] = bid.bid_amount
+        else:
+            current_bids[listing.id] = listing.initial_bid
     if request.method == 'POST':
         form = BidForm(request.POST)
         if form.is_valid():
             bid_amount = form.cleaned_data['bid_amount']
-            if current_bids[auction_listing.id] == listing.initial_bid:
-                highest_bidding_price = current_bids[auction_listing.id]
-            else:
-                highest_bidding_price = current_bids[auction_listing.id].bid_amount
+            highest_bidding_price = current_bids[auction_listing.id]
             if bid_amount <= highest_bidding_price:
                 form.add_error('bid_amount',"Your bid is not sufficient and must be higher than the current bid amount")
             else:
