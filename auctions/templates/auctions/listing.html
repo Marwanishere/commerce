@@ -20,8 +20,8 @@
         <p>Category: {{ listing.category }}</p>
         <p>Initial Bid: £{{ listing.initial_bid }}</p>
         <p>Current Bid: £{{ listing.current_bid }}</p>
-        {% if winner %}
-            <p>The winner is: {{winner.user.username}}</p>
+        {% if listing.winner %}
+            <p>The winner is: {{ listing.winner.username }}</p>
         {% else %}
             <p> Bid still open </p>
         {% endif %}

@@ -1,0 +1,24 @@
+{% extends "auctions/layout.html" %}
+{% load templatetags %}
+{% block body %}
+    <h1>Previous Listings</h1>
+	<ul>
+		<pretty_boxes>
+			<div>
+<!-- code for function below acquired from cs50 chatbot prompting -->
+				{% for listing in inactive_listings %}
+					<a href="{% url 'listing' listing.id %}">
+					<li><h2>{{ listing.title }}</h2>
+					<img src="{{ listing.image.url }}" style="max-width: 300px; max-height: 300px;">
+					<p>{{ listing.description }}</p>
+					<p>Posted by: {{ listing.user }}</p>
+					<p>On sale: {{ listing.is_open }}</p>
+					<p>Category: {{ listing.category }}</p>
+					<p>Initial Bid: £{{ listing.initial_bid }}</p>
+					<p>Final Bid: £{{ listing.current_bid }}</p>
+				</li>
+				{% endfor %}
+			</div>
+		</pretty_boxes>
+	</ul>
+{% endblock %}
