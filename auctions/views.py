@@ -176,7 +176,7 @@ def previous_listings_view(request):
     return render(request, "auctions/previous_listings.html", {'inactive_listings': inactive_listings})
 
 def watch(request):
-    inactive_listings = AuctionListing.objects.filter(is_open=False)
+    inactive_listings = AuctionListing.objects.filter(is_open=True)
     return render(request, "auctions/watch.html", {'inactive_listings': inactive_listings})
 
 def categories(request):
