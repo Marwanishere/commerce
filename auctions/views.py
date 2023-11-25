@@ -180,6 +180,6 @@ def watch(request):
     return render(request, "auctions/watch.html", {'inactive_listings': inactive_listings})
 
 def categories(request):
-    inactive_listings = AuctionListing.objects.filter(is_open=False)
+    inactive_listings = AuctionListing.objects.filter(is_open=True)
     return render(request, "auctions/categories.html", {'inactive_listings': inactive_listings})
 #the request.user part on line in closing_bid_view checks if the user is the same one who made the listing.
