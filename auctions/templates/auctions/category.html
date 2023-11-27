@@ -5,7 +5,9 @@
 	<ul>
 		<pretty_boxes>
 			<div>
-				
+				{% for listbit in items_in_list %}
+                <li><a href = "{% url 'category' category %}">{{ category.title }}</a>
+                </li>{% endfor %}
 			</div>
 		</pretty_boxes>
 	</ul>

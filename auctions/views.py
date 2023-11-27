@@ -195,7 +195,7 @@ def a2w(request, listing_id):
 
 def category_view(request, category):
     items_in_list = AuctionListing.objects.filter(category=category)
-    return render(request, 'auctions/category.html', {'items_in_list': items_in_list})
+    return render(request, 'auctions/category.html', {'category': category, 'items_in_list': items_in_list})
 
 def categories(request):
     #below line generated with the assistance of cs50 chatbot
