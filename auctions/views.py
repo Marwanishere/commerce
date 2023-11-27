@@ -193,9 +193,15 @@ def a2w(request, listing_id):
         #neww stands for new watch listing
     return HttpResponse("Added to Watchlist")
 
+def category_view(request, category):
+    items_in_list = AuctionListing.objects.filter(category=category)
+    return render(request, 'auctions/category.html', {'items_in_list': items_in_list})
+
 def categories(request):
-    inactive_listings = AuctionListing.objects.filter(is_open=False)
-    return render(request, "auctions/categories.html", {'inactive_listings': inactive_listings})
+    #below line generated with the assistance of cs50 chatbot
+    categories = AuctionListing.objects.values('category').distinct()
+    return render(request, "auctions/categories.html", {'categories': categories})
+
 #the request.user part on line in closing_bid_view checks if the user is the same one who made the listing.
 
 #using print() will ussually output the result to your command prompt
