@@ -6,7 +6,8 @@
 		<pretty_boxes>
 			<div>
 				{% for listbit in items_in_list %}
-                <li><a href = "{% url 'category' category %}">{{ category.title }}</a>
+                <!-- cs50 chatbot helped tweak the line below for the intended purpose -->
+                <li><a href = "{% url 'listing' listbit.id %}">{{ listbit.title }}</a>
                 </li>{% endfor %}
 			</div>
 		</pretty_boxes>
