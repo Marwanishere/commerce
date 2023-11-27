@@ -16,5 +16,6 @@ urlpatterns = [
     path("not_in", views.not_in, name = "not_in"),
     path("watch", views.watch, name = "watch"),
     path("categories", views.categories, name = "categories"),
+    path('listing/<int:listing_id>', views.a2w, name='a2w'),
     path("previous_listings", views.previous_listings_view, name = "previous_listings")
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

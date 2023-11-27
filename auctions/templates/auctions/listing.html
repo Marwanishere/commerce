@@ -29,6 +29,9 @@
             {% csrf_token %}
             <button type = "submit">Close Bid</button>
         </form>
+        <form action="{% url 'a2w' listing_id=listing.id %}">
+            <button type="submit">Add to Watchlist</button>
+        </form>
         <form method="post" action="{% url 'current_price' listing.id %}" enctype="multipart/form-data">
             {% csrf_token %}
             {{ form.bid_amount.errors }}

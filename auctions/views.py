@@ -10,6 +10,7 @@ from .models import User
 from .models import AuctionListing
 from .models import Bid
 from .models import Comment
+from .models import Watch
 from .forms import AuctionListingForm
 from .forms import BidForm
 from .forms import CommentForm
@@ -176,10 +177,25 @@ def previous_listings_view(request):
     return render(request, "auctions/previous_listings.html", {'inactive_listings': inactive_listings})
 
 def watch(request):
-    inactive_listings = AuctionListing.objects.filter(is_open=True)
-    return render(request, "auctions/watch.html", {'inactive_listings': inactive_listings})
+    usw = Watch.objects.filter(user=request.user)
+    #usr stands for user specific watchlist
+    return render(request, "auctions/watch.html", {'watchlist': usw})
+
+def a2w(request, listing_id):
+    #a2w stands for add (listing) to watchlist
+    user = request.user
+    #the above line is used to associate the object with the user
+    listing = AuctionListing.objects.get(id=listing_id)
+    if not Watch.objects.filter(user=user, auction_listing=listing).exists():
+        #the above line checks if the listing is already in the users watch list and was made using cs50 chatbot
+        neww = Watch(user=user, auction_listing= listing )
+        neww.save()
+        #neww stands for new watch listing
+    return render(request, "auctions/listing.html", {"listing_id" : listing.id})
 
 def categories(request):
     inactive_listings = AuctionListing.objects.filter(is_open=False)
     return render(request, "auctions/categories.html", {'inactive_listings': inactive_listings})
 #the request.user part on line in closing_bid_view checks if the user is the same one who made the listing.
+
+#using print() will ussually output the result to your command prompt
