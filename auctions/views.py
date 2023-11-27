@@ -177,9 +177,9 @@ def previous_listings_view(request):
     return render(request, "auctions/previous_listings.html", {'inactive_listings': inactive_listings})
 
 def watch(request):
-    usw = Watch.objects.filter(user=request.user)
-    #usr stands for user specific watchlist
-    return render(request, "auctions/watch.html", {'watchlist': usw})
+    watchitems = Watch.objects.filter(user=request.user)
+    lis = [listing.auction_listing for listing in watchitems]
+    return render(request, "auctions/watch.html", {'watchlist': lis})
 
 def a2w(request, listing_id):
     #a2w stands for add (listing) to watchlist
@@ -191,7 +191,7 @@ def a2w(request, listing_id):
         neww = Watch(user=user, auction_listing= listing )
         neww.save()
         #neww stands for new watch listing
-    return render(request, "auctions/listing.html", {"listing_id" : listing.id})
+    return HttpResponse("Added to Watchlist")
 
 def categories(request):
     inactive_listings = AuctionListing.objects.filter(is_open=False)
