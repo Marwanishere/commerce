@@ -16,7 +16,8 @@ urlpatterns = [
     path("not_in", views.not_in, name = "not_in"),
     path("watch/1", views.watch, name = "watch"),
     path("categories", views.categories, name = "categories"),
-    path("category", views.category_view, name = "category"),
+    #ammendment to path below made using cs50 chatbot assistance
+    path('category/<str:category>', views.category_view, name='category'),
     path('watch/<int:listing_id>/', views.a2w, name='a2w'),
     path("previous_listings", views.previous_listings_view, name = "previous_listings")
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

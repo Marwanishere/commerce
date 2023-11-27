@@ -6,8 +6,9 @@
 		<pretty_boxes>
 			<div>
 				{% for category in categories %}
+				<li>
 				<!-- dont understand why i should use category.category, got this from cs50 chatbot -->
-				<a href="{% url 'category' category.category %}">{{ category.category }}</a>
+				<a href="{% url 'category' category.category %}">{{ category.category }}</a></li>
 				{% endfor %}
 			</div>
 		</pretty_boxes>
