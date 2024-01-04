@@ -4,9 +4,9 @@
     <h1>Active Listings</h1>
 	<ul>
 		<pretty_boxes>
-			<div>
-<!-- code for function below acquired from cs50 chatbot prompting -->
-				{% for listing in Listings %}
+			<!-- code for function below acquired from cs50 chatbot prompting -->
+			{% for listing in Listings %}
+				<div id = active_listings>
 					<a href="{% url 'listing' listing.id %}">
 					<li><h2>{{ listing.title }}</h2>
 					<img src="{{ listing.image.url }}" style="max-width: 300px; max-height: 300px;">
@@ -17,8 +17,8 @@
 					<p>Initial Bid: £{{ listing.initial_bid }}</p>
 					<p>Current Bid: £{{ listing.current_bid }}</p>
 				</li>
-				{% endfor %}
-			</div>
+				</div>
+			{% endfor %}
 		</pretty_boxes>
 	</ul>
 {% endblock %}

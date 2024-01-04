@@ -17,3 +17,15 @@ pretty_boxes {
 p {
     font-style: inherit;
 }
+#active_listings{
+    background-color: #baced4;
+    padding: 10px;
+    margin-bottom: 10px;
+    animation-name: hide;
+    animation-duration: 2s;
+    animation-fill-mode: forwards;
+    animation-play-state: paused;
+    border-radius: 2%;
+    margin-left: 5px;
+    
+}
